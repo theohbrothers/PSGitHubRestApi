@@ -1,6 +1,6 @@
 # PSGitHubRestApi
 
-A module for [GitHub REST API](https://developer.github.com/v3/).
+A powershell module for [GitHub REST API](https://developer.github.com/v3/).
 
 ## Usage
 
