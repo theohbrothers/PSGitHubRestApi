@@ -27,7 +27,7 @@ function New-GHRepositoryRelease {
         ,
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
-        [string[]]$Body
+        [string]$Body
         ,
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
