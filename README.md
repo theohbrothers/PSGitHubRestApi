@@ -13,5 +13,5 @@ Import-Module .\src\PSGitHubRestApi\PSGitHubRestApi.psm1 -Force -Verbose
 To list all available functions:
 
 ```powershell
-Get-Command -Module PSMockModule
+Get-Command -Module PSGitHubRestApi
 ```
