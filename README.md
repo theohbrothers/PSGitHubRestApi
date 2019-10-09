@@ -1,6 +1,9 @@
-# PSGitHubRestApi
+# PSGitHubRestApi [![badge-version-github-tag-img][]][badge-version-github-tag-src]
 
-A module for [GitHub REST API](https://developer.github.com/v3/).
+[badge-version-github-tag-img]: https://img.shields.io/github/v/tag/theohbrothers/PSGitHubRestApi?style=flat-square
+[badge-version-github-tag-src]: https://github.com/theohbrothers/PSGitHubRestApi/releases
+
+A powershell module for [GitHub REST API](https://developer.github.com/v3/).
 
 ## Usage
 
@@ -13,5 +16,5 @@ Import-Module .\src\PSGitHubRestApi\PSGitHubRestApi.psm1 -Force -Verbose
 To list all available functions:
 
 ```powershell
-Get-Command -Module PSMockModule
+Get-Command -Module PSGitHubRestApi
 ```
