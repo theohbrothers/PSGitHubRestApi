@@ -1,4 +1,4 @@
-function Edit-GHRepositoryRelease {
+function Edit-GitHubRepositoryRelease {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]

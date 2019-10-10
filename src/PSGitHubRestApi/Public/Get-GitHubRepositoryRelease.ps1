@@ -1,4 +1,4 @@
-function Get-GHRepositoryRelease {
+function Get-GitHubRepositoryRelease {
     [CmdletBinding(DefaultParameterSetName='Single')]
     param(
         [Parameter(Mandatory=$true)]

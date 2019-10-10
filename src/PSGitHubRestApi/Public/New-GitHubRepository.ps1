@@ -1,4 +1,4 @@
-function New-GHRepository {
+function New-GitHubRepository {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
