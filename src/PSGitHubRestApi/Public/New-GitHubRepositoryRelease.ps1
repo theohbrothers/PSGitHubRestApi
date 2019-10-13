@@ -64,7 +64,7 @@ function New-GitHubRepositoryRelease {
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
-            $_response = Invoke-WebRequest -Uri $_uri -Method Post -Headers $_headers -Body $_bodyJson
+            $_response = Invoke-WebRequest -Uri $_uri -Method Post -Headers $_headers -Body $_bodyJson -UseBasicParsing
         }catch {
             throw
         }
