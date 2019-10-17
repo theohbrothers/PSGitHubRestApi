@@ -58,9 +58,9 @@ function New-GitHubRepositoryRelease {
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'"| Write-Verbose
         "Headers:" | Write-Verbose
-        ($_headersMasked | Out-String).Trim() | Write-Verbose
+        $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
         "Body:" | Write-Verbose
-        ($_body | Out-String).Trim() | Write-Verbose
+        $_body | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
