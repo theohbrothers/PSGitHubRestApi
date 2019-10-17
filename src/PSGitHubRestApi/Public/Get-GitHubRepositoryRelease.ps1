@@ -36,14 +36,13 @@ function Get-GitHubRepositoryRelease {
             $_headersMasked = $_headers.Clone()
             $_headersMasked['Authorization'] = "token *******"
         }
-        $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'"| Write-Verbose
         "Headers:" | Write-Verbose
         ($_headersMasked | Out-String).Trim() | Write-Verbose
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
-            $_response = Invoke-WebRequest -Uri $_uri -Method Get -Headers $_headers -Body $_bodyJson -UseBasicParsing
+            $_response = Invoke-WebRequest -Uri $_uri -Method Get -Headers $_headers -UseBasicParsing
         }catch {
             throw
         }
