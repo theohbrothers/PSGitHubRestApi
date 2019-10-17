@@ -36,7 +36,7 @@ function Get-GitHubRepositoryRelease {
             $_headersMasked = $_headers.Clone()
             $_headersMasked['Authorization'] = "token *******"
         }
-        "Uri: '$_uri'"| Write-Verbose
+        "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
         $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
     }process{

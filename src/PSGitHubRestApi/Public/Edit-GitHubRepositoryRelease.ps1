@@ -60,7 +60,7 @@ function Edit-GitHubRepositoryRelease {
         $_body['draft'] = $PSBoundParameters['Draft']
         $_body['prerelease'] = $PSBoundParameters['Prerelease']
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
-        "Uri: '$_uri'"| Write-Verbose
+        "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
         $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
         "Body:" | Write-Verbose
