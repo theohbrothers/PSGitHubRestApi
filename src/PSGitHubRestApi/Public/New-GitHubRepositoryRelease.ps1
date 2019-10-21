@@ -53,8 +53,8 @@ function New-GitHubRepositoryRelease {
         if ($PSBoundParameters['TargetCommitish']) { $_body['target_commitish'] = $PSBoundParameters['TargetCommitish'] }
         if ($PSBoundParameters['Name']) { $_body['name'] = $PSBoundParameters['Name'] }
         if ($PSBoundParameters['Body']) { $_body['body'] = $PSBoundParameters['Body'] }
-        if ($PSBoundParameters['Draft']) { $_body['draft'] = $PSBoundParameters['Draft'] }
-        if ($PSBoundParameters['Prerelease']) { $_body['prerelease'] = $PSBoundParameters['Prerelease'] }
+        if ($null -ne $PSBoundParameters['Draft']) { $_body['draft'] = $PSBoundParameters['Draft'] }
+        if ($null -ne $PSBoundParameters['Prerelease']) { $_body['prerelease'] = $PSBoundParameters['Prerelease'] }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
