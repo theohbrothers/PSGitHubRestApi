@@ -53,12 +53,14 @@ function New-GitHubRepositoryRelease {
         if ($PSBoundParameters['TargetCommitish']) { $_body['target_commitish'] = $PSBoundParameters['TargetCommitish'] }
         if ($PSBoundParameters['Name']) { $_body['name'] = $PSBoundParameters['Name'] }
         if ($PSBoundParameters['Body']) { $_body['body'] = $PSBoundParameters['Body'] }
-        $_body['draft'] = $PSBoundParameters['Draft']
-        $_body['prerelease'] = $PSBoundParameters['Prerelease']
+        if ($null -ne $PSBoundParameters['Draft']) { $_body['draft'] = $PSBoundParameters['Draft'] }
+        if ($null -ne $PSBoundParameters['Prerelease']) { $_body['prerelease'] = $PSBoundParameters['Prerelease'] }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
-        $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        if ($VerbosePreference -ne 'SilentlyContinue') {
+            $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        }
         "Body:" | Write-Verbose
         $_body | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
     }process{

@@ -38,7 +38,9 @@ function Get-GitHubRepositoryRelease {
         }
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
-        $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        if ($VerbosePreference -ne 'SilentlyContinue') {
+            $_headersMasked | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        }
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
