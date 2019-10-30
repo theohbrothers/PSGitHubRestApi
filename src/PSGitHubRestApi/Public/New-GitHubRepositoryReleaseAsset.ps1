@@ -6,6 +6,7 @@ function New-GitHubRepositoryReleaseAsset {
         ,
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
+        [ValidateScript({Test-Path -Path $_ -PathType Leaf})]
         [string]$Asset
         ,
         [Parameter(Mandatory=$true)]
