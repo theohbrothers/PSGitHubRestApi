@@ -23,11 +23,11 @@ function Get-GitHubRepositoryRelease {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
+        $_apiEndpoint = 'https://api.github.com'
         if ($PSBoundParameters['ReleaseId']) {
-            $_uri = "$apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
+            $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
         }elseif ($PSBoundParameters['All']) {
-            $_uri = "$apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
+            $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
         }
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"

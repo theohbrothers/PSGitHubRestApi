@@ -39,8 +39,8 @@ function New-GitHubRepositoryRelease {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
-        $_uri = "$apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
+        $_apiEndpoint = 'https://api.github.com'
+        $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"
         }

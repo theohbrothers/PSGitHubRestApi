@@ -75,11 +75,11 @@ function New-GitHubRepository {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
+        $_apiEndpoint = 'https://api.github.com'
         $_uri = if ($PSBoundParameters['AccountType'] -eq 'User') {
-                "$apiEndpoint/user/repos"
+                "$_apiEndpoint/user/repos"
             }elseif ($PSBoundParameters['AccountType'] -eq 'Organization') {
-                "$apiEndpoint/orgs/$($PSBoundParameters['Namespace'])/repos"
+                "$_apiEndpoint/orgs/$($PSBoundParameters['Namespace'])/repos"
             }
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"

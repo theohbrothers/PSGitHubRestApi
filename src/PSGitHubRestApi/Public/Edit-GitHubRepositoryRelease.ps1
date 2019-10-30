@@ -43,8 +43,8 @@ function Edit-GitHubRepositoryRelease {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
-        $_uri = "$apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
+        $_apiEndpoint = 'https://api.github.com'
+        $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"
         }
