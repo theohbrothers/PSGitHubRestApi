@@ -39,8 +39,8 @@ function New-GitHubRepositoryRelease {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
-        $_uri = "$apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
+        $_apiEndpoint = 'https://api.github.com'
+        $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"
         }
@@ -63,10 +63,17 @@ function New-GitHubRepositoryRelease {
         }
         "Body:" | Write-Verbose
         $_body | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        $_iwrArgs = @{
+            Uri = $_uri
+            Method = 'Post'
+            Headers = $_headers
+            Body = $_bodyJson
+            UseBasicParsing = $true
+        }
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
-            $_response = Invoke-WebRequest -Uri $_uri -Method Post -Headers $_headers -Body $_bodyJson -UseBasicParsing
+            $_response = Invoke-WebRequest @_iwrArgs
         }catch {
             throw
         }

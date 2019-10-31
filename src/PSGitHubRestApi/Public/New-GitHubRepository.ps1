@@ -75,11 +75,11 @@ function New-GitHubRepository {
     )
 
     begin {
-        $apiEndpoint = 'https://api.github.com'
+        $_apiEndpoint = 'https://api.github.com'
         $_uri = if ($PSBoundParameters['AccountType'] -eq 'User') {
-                "$apiEndpoint/user/repos"
+                "$_apiEndpoint/user/repos"
             }elseif ($PSBoundParameters['AccountType'] -eq 'Organization') {
-                "$apiEndpoint/orgs/$($PSBoundParameters['Namespace'])/repos"
+                "$_apiEndpoint/orgs/$($PSBoundParameters['Namespace'])/repos"
             }
         $_headers = @{
             Authorization = "token $($PSBoundParameters['ApiKey'])"
@@ -113,10 +113,17 @@ function New-GitHubRepository {
         }
         "Body:" | Write-Verbose
         $_body | Out-String -Stream | % { $_.Trim() } | ? { $_ } | Write-Verbose
+        $_iwrArgs = @{
+            Uri = $_uri
+            Method = 'Post'
+            Headers = $_headers
+            Body = $_bodyJson
+            UseBasicParsing = $true
+        }
     }process{
         try {
             "Invoking Web Request" | Write-Verbose
-            $_response = Invoke-WebRequest -Uri $_uri -Method Post -Headers $_headers -Body $_bodyJson -UseBasicParsing
+            $_response = Invoke-WebRequest @_iwrArgs
         }catch {
             throw
         }
