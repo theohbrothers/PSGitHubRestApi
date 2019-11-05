@@ -39,7 +39,7 @@ function New-GitHubRepositoryReleaseAsset {
             InFile = $_assetItem.FullName
             UseBasicParsing = $true
         }
-    }process{
+    }process {
         try {
             "Invoking Web Request" | Write-Verbose
             $_response = Invoke-WebRequest @_iwrArgs

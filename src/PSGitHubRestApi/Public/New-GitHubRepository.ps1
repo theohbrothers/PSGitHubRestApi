@@ -120,7 +120,7 @@ function New-GitHubRepository {
             Body = $_bodyJson
             UseBasicParsing = $true
         }
-    }process{
+    }process {
         try {
             "Invoking Web Request" | Write-Verbose
             $_response = Invoke-WebRequest @_iwrArgs
