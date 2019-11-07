@@ -1,4 +1,5 @@
 function New-GitHubRepositoryReleaseAsset {
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
