@@ -18,7 +18,6 @@ function Get-GitHubRepositoryRelease {
         [string]$ReleaseId
         ,
         [Parameter(ParameterSetName='All', Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
         [switch]$All
     )
 
