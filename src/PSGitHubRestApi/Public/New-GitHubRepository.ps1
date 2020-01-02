@@ -76,35 +76,35 @@ function New-GitHubRepository {
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
-        $_uri = if ($PSBoundParameters['AccountType'] -eq 'User') {
+        $_uri = if ($AccountType -eq 'User') {
                 "$_apiEndpoint/user/repos"
-            }elseif ($PSBoundParameters['AccountType'] -eq 'Organization') {
-                "$_apiEndpoint/orgs/$($PSBoundParameters['Namespace'])/repos"
+            }elseif ($AccountType -eq 'Organization') {
+                "$_apiEndpoint/orgs/$($Namespace)/repos"
             }
         $_headers = @{
-            Authorization = "token $($PSBoundParameters['ApiKey'])"
+            Authorization = "token $($ApiKey)"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()
             $_headersMasked['Authorization'] = "token *******"
         }
         $_body = [Ordered]@{
-            name = $PSBoundParameters['Repository']
+            name = $Repository
         }
-        if ($PSBoundParameters['Description']) { $_body['description'] = $PSBoundParameters['Description'] }
-        if ($PSBoundParameters['Homepage']) { $_body['homepage'] = $PSBoundParameters['Homepage'] }
-        if ($PSBoundParameters['Private']) { $_body['private'] = $PSBoundParameters['Private'] }
-        if ($PSBoundParameters['HasIssues']) { $_body['has_issues'] = $PSBoundParameters['HasIssues'] }
-        if ($PSBoundParameters['HasProjects']) { $_body['has_projects'] = $PSBoundParameters['HasProjects'] }
-        if ($PSBoundParameters['HasWiki']) { $_body['has_wiki'] = $PSBoundParameters['HasWiki'] }
-        if ($PSBoundParameters['IsTemplate']) { $_body['is_template'] = $PSBoundParameters['IsTemplate'] }
-        if ($PSBoundParameters['TeamId']) { $_body['team_id'] = $PSBoundParameters['TeamId'] }
-        if ($PSBoundParameters['AutoInit']) { $_body['auto_init'] = $PSBoundParameters['AutoInit'] }
-        if ($PSBoundParameters['GitignoreTemplate']) { $_body['gitignore_template'] = $PSBoundParameters['GitignoreTemplate'] }
-        if ($PSBoundParameters['LicenseTemplate']) { $_body['license_template'] = $PSBoundParameters['LicenseTemplate'] }
-        if ($PSBoundParameters['AllowSquashMerge']) { $_body['allow_squash_merge'] = $PSBoundParameters['AllowSquashMerge'] }
-        if ($PSBoundParameters['AllowMergeCommit']) { $_body['allow_merge_commit'] = $PSBoundParameters['AllowMergeCommit'] }
-        if ($PSBoundParameters['AllowRebaseMerge']) { $_body['allow_rebase_merge'] = $PSBoundParameters['AllowRebaseMerge'] }
+        if ($Description) { $_body['description'] = $Description }
+        if ($Homepage) { $_body['homepage'] = $Homepage }
+        if ($Private) { $_body['private'] = $Private }
+        if ($HasIssues) { $_body['has_issues'] = $HasIssues }
+        if ($HasProjects) { $_body['has_projects'] = $HasProjects }
+        if ($HasWiki) { $_body['has_wiki'] = $HasWiki }
+        if ($IsTemplate) { $_body['is_template'] = $IsTemplate }
+        if ($TeamId) { $_body['team_id'] = $TeamId }
+        if ($AutoInit) { $_body['auto_init'] = $AutoInit }
+        if ($GitignoreTemplate) { $_body['gitignore_template'] = $GitignoreTemplate }
+        if ($LicenseTemplate) { $_body['license_template'] = $LicenseTemplate }
+        if ($AllowSquashMerge) { $_body['allow_squash_merge'] = $AllowSquashMerge }
+        if ($AllowMergeCommit) { $_body['allow_merge_commit'] = $AllowMergeCommit }
+        if ($AllowRebaseMerge) { $_body['allow_rebase_merge'] = $AllowRebaseMerge }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
@@ -120,7 +120,7 @@ function New-GitHubRepository {
             Body = $_bodyJson
             UseBasicParsing = $true
         }
-    }process{
+    }process {
         try {
             "Invoking Web Request" | Write-Verbose
             $_response = Invoke-WebRequest @_iwrArgs

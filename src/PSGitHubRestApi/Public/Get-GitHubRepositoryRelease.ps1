@@ -18,19 +18,18 @@ function Get-GitHubRepositoryRelease {
         [string]$ReleaseId
         ,
         [Parameter(ParameterSetName='All', Mandatory=$true)]
-        [ValidateNotNullOrEmpty()]
         [switch]$All
     )
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
-        if ($PSBoundParameters['ReleaseId']) {
-            $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
-        }elseif ($PSBoundParameters['All']) {
-            $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases"
+        if ($ReleaseId) {
+            $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases/$($ReleaseId)"
+        }elseif ($All) {
+            $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases"
         }
         $_headers = @{
-            Authorization = "token $($PSBoundParameters['ApiKey'])"
+            Authorization = "token $($ApiKey)"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()
@@ -47,7 +46,7 @@ function Get-GitHubRepositoryRelease {
             Headers = $_headers
             UseBasicParsing = $true
         }
-    }process{
+    }process {
         try {
             "Invoking Web Request" | Write-Verbose
             $_response = Invoke-WebRequest @_iwrArgs
