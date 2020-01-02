@@ -16,13 +16,13 @@ function New-GitHubRepositoryReleaseAsset {
     )
 
     begin {
-        $_matchInfo = $PSBoundParameters['UploadUrl'].Trim() | Select-String -Pattern '(.+\/assets)($|{\?name,label})'
-        $_uploadUrlProcessed = if ($_matchInfo) { $_matchInfo.Matches.Groups[1].Value } else { $PSBoundParameters['UploadUrl'] }
-        $_assetItem = Get-Item -Path $PSBoundParameters['Asset'] -ErrorAction Stop
+        $_matchInfo = $UploadUrl.Trim() | Select-String -Pattern '(.+\/assets)($|{\?name,label})'
+        $_uploadUrlProcessed = if ($_matchInfo) { $_matchInfo.Matches.Groups[1].Value } else { $UploadUrl }
+        $_assetItem = Get-Item -Path $Asset -ErrorAction Stop
 
         $_uri = "$($_uploadUrlProcessed)?name=$($_assetItem.Name)"
         $_headers = @{
-            Authorization = "token $($PSBoundParameters['ApiKey'])"
+            Authorization = "token $($ApiKey)"
             "Content-Type" = "application/octet-stream"
         }
         "Uri: '$_uri'" | Write-Verbose

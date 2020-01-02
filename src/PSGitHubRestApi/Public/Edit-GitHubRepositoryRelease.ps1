@@ -44,21 +44,21 @@ function Edit-GitHubRepositoryRelease {
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
-        $_uri = "$_apiEndpoint/repos/$($PSBoundParameters['Namespace'])/$($PSBoundParameters['Repository'])/releases/$($PSBoundParameters['ReleaseId'])"
+        $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases/$($ReleaseId)"
         $_headers = @{
-            Authorization = "token $($PSBoundParameters['ApiKey'])"
+            Authorization = "token $($ApiKey)"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()
             $_headersMasked['Authorization'] = "token *******"
         }
         $_body = [Ordered]@{}
-        if ($PSBoundParameters['TagName']) { $_body['tag_name'] = $PSBoundParameters['TagName'] }
-        if ($PSBoundParameters['TargetCommitish']) { $_body['target_commitish'] = $PSBoundParameters['TargetCommitish'] }
-        if ($PSBoundParameters['Name']) { $_body['name'] = $PSBoundParameters['Name'] }
-        if ($PSBoundParameters['Body']) { $_body['body'] = $PSBoundParameters['Body'] }
-        if ($null -ne $PSBoundParameters['Draft']) { $_body['draft'] = $PSBoundParameters['Draft'] }
-        if ($null -ne $PSBoundParameters['Prerelease']) { $_body['prerelease'] = $PSBoundParameters['Prerelease'] }
+        if ($TagName) { $_body['tag_name'] = $TagName }
+        if ($TargetCommitish) { $_body['target_commitish'] = $TargetCommitish }
+        if ($Name) { $_body['name'] = $Name }
+        if ($Body) { $_body['body'] = $Body }
+        if ($null -ne $Draft) { $_body['draft'] = $Draft }
+        if ($null -ne $Prerelease) { $_body['prerelease'] = $Prerelease }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
