@@ -3,7 +3,7 @@
 [badge-version-github-tag-img]: https://img.shields.io/github/v/tag/theohbrothers/PSGitHubRestApi?style=flat-square
 [badge-version-github-tag-src]: https://github.com/theohbrothers/PSGitHubRestApi/releases
 
-A powershell module for [GitHub REST API](https://developer.github.com/v3/).
+A PowerShell module for [GitHub REST API](https://developer.github.com/v3/).
 
 ## Usage
 
