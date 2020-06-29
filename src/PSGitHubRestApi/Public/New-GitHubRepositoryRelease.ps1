@@ -53,8 +53,8 @@ function New-GitHubRepositoryRelease {
         if ($TargetCommitish) { $_body['target_commitish'] = $TargetCommitish }
         if ($Name) { $_body['name'] = $Name }
         if ($Body) { $_body['body'] = $Body }
-        if ($null -ne $Draft) { $_body['draft'] = $Draft.ToString().ToLower() }
-        if ($null -ne $Prerelease) { $_body['prerelease'] = $Prerelease.ToString().ToLower() }
+        if ($null -ne $Draft) { $_body['draft'] = $Draft }
+        if ($null -ne $Prerelease) { $_body['prerelease'] = $Prerelease }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
