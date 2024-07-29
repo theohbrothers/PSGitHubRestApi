@@ -36,6 +36,22 @@ function New-GitHubRepositoryRelease {
         [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [bool]$Prerelease
+        ,
+        [Parameter(Mandatory=$false)]
+        [ValidateNotNullOrEmpty()]
+        [string]$DiscussionCategoryName
+        ,
+        [Parameter(Mandatory=$false)]
+        [ValidateNotNullOrEmpty()]
+        [bool]$GenerateReleaseNotes
+        ,
+        [Parameter(Mandatory=$false)]
+        [ValidateSet(
+            "True",
+            "False",
+            "Legacy"
+        )]
+        [string]$MakeLatest
     )
 
     begin {
@@ -55,6 +71,9 @@ function New-GitHubRepositoryRelease {
         if ($Body) { $_body['body'] = $Body }
         if ($null -ne $Draft) { $_body['draft'] = $Draft }
         if ($null -ne $Prerelease) { $_body['prerelease'] = $Prerelease }
+        if ($DiscussionCategoryName) { $_body['discussion_category_name'] = $DiscussionCategoryName }
+        if ($null -ne $GenerateReleaseNotes) { $_body['generate_release_notes'] = $GenerateReleaseNotes }
+        if ($MakeLatest) { $_body['make_latest'] = $MakeLatest }
         $_bodyJson = $_body | ConvertTo-Json -Depth 100
         "Uri: '$_uri'" | Write-Verbose
         "Headers:" | Write-Verbose
