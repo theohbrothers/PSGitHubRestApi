@@ -37,7 +37,7 @@ function New-GitHubRepositoryReleaseAsset {
         $_assetItem = Get-Item -Path $Asset -ErrorAction Stop
         $_uri = "$($_uploadUrlProcessed)?name=$($_assetItem.Name)"
         $_headers = @{
-            Authorization = "token $($ApiKey)"
+            Authorization = "token $ApiKey"
             "Content-Type" = "application/octet-stream"
         }
         "Uri: '$_uri'" | Write-Verbose
