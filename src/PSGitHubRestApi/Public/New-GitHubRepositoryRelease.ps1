@@ -56,9 +56,9 @@ function New-GitHubRepositoryRelease {
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
-        $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases"
+        $_uri = "$_apiEndpoint/repos/$Namespace/$Repository/releases"
         $_headers = @{
-            Authorization = "token $($ApiKey)"
+            Authorization = "token $ApiKey"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()

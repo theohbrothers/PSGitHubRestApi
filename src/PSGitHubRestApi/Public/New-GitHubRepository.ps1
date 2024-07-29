@@ -79,10 +79,10 @@ function New-GitHubRepository {
         $_uri = if ($AccountType -eq 'User') {
                 "$_apiEndpoint/user/repos"
             }elseif ($AccountType -eq 'Organization') {
-                "$_apiEndpoint/orgs/$($Namespace)/repos"
+                "$_apiEndpoint/orgs/$Namespace/repos"
             }
         $_headers = @{
-            Authorization = "token $($ApiKey)"
+            Authorization = "token $ApiKey"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()

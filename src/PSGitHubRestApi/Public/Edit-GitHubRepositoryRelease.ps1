@@ -56,9 +56,9 @@ function Edit-GitHubRepositoryRelease {
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
-        $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases/$($ReleaseId)"
+        $_uri = "$_apiEndpoint/repos/$Namespace/$Repository/releases/$ReleaseId"
         $_headers = @{
-            Authorization = "token $($ApiKey)"
+            Authorization = "token $ApiKey"
         }
         if ($VerbosePreference -ne 'SilentlyContinue') {
             $_headersMasked = $_headers.Clone()
