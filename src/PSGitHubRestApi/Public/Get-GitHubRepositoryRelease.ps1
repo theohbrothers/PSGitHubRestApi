@@ -1,5 +1,5 @@
 function Get-GitHubRepositoryRelease {
-    [CmdletBinding(DefaultParameterSetName='Single')]
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
@@ -13,19 +13,16 @@ function Get-GitHubRepositoryRelease {
         [ValidateNotNullOrEmpty()]
         [string]$ApiKey
         ,
-        [Parameter(ParameterSetName='Single', Mandatory=$false)]
+        [Parameter(Mandatory=$false)]
         [ValidateNotNullOrEmpty()]
         [string]$ReleaseId
-        ,
-        [Parameter(ParameterSetName='All', Mandatory=$true)]
-        [switch]$All
     )
 
     begin {
         $_apiEndpoint = 'https://api.github.com'
         if ($ReleaseId) {
             $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases/$($ReleaseId)"
-        }elseif ($All) {
+        }else {
             $_uri = "$_apiEndpoint/repos/$($Namespace)/$($Repository)/releases"
         }
         $_headers = @{
