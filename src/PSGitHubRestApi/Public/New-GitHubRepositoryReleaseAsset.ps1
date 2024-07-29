@@ -1,7 +1,19 @@
 function New-GitHubRepositoryReleaseAsset {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName='$ReleaseId')]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Namespace
+        ,
+        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$Repository
+        ,
+        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ReleaseId
+        ,
+        [Parameter(ParameterSetName='UploadUrl', Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]$UploadUrl
         ,
@@ -16,10 +28,13 @@ function New-GitHubRepositoryReleaseAsset {
     )
 
     begin {
-        $_matchInfo = $UploadUrl.Trim() | Select-String -Pattern '(.+\/assets)($|{\?name,label})'
-        $_uploadUrlProcessed = if ($_matchInfo) { $_matchInfo.Matches.Groups[1].Value } else { $UploadUrl }
+        if ($ReleaseId) {
+            $_uploadUrlProcessed = "https://uploads.github.com/repos/$Namespace/$Repository/releases/$ReleaseId/assets"
+        }elseif ($UploadUrl) {
+            $_matchInfo = $UploadUrl.Trim() | Select-String -Pattern '(.+\/assets)($|{\?name,label})'
+            $_uploadUrlProcessed = if ($_matchInfo) { $_matchInfo.Matches.Groups[1].Value } else { $UploadUrl }
+        }
         $_assetItem = Get-Item -Path $Asset -ErrorAction Stop
-
         $_uri = "$($_uploadUrlProcessed)?name=$($_assetItem.Name)"
         $_headers = @{
             Authorization = "token $($ApiKey)"
