@@ -13,7 +13,7 @@ function New-GitHubRepositoryRelease {
         [ValidateNotNullOrEmpty()]
         [string]$ApiKey
         ,
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]$TagName
         ,
