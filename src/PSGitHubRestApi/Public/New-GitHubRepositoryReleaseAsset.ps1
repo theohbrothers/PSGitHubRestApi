@@ -1,15 +1,15 @@
 function New-GitHubRepositoryReleaseAsset {
-    [CmdletBinding(DefaultParameterSetName='$ReleaseId')]
+    [CmdletBinding(DefaultParameterSetName='ReleaseId')]
     param(
-        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [Parameter(ParameterSetName='ReleaseId', Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]$Namespace
         ,
-        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [Parameter(ParameterSetName='ReleaseId', Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]$Repository
         ,
-        [Parameter(ParameterSetName='$ReleaseId', Mandatory=$true)]
+        [Parameter(ParameterSetName='ReleaseId', Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [string]$ReleaseId
         ,
